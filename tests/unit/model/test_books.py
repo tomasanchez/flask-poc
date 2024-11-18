@@ -1,5 +1,3 @@
-import uuid
-
 from src.poc.model.book import Book
 
 
@@ -22,7 +20,7 @@ class TestBooks:
 
         # THEN
         assert book.id is not None
-        assert isinstance(book.id, uuid.UUID)
+        assert isinstance(book.id, int)
         assert title == book.title
         assert name == book.author
         assert year == book.published_year

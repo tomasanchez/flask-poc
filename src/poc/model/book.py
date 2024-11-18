@@ -1,14 +1,18 @@
 """
 Book Model
 """
-import dataclasses
-import uuid
+
+from sqlalchemy import String
+from sqlalchemy.orm import Mapped, mapped_column
+
+from src.poc.model import Base
 
 
-@dataclasses.dataclass(frozen=True)
-class Book:
-    title: str
-    author: str | None = None
-    genre: str | None = None
-    published_year: int | None = None
-    id: uuid.UUID = dataclasses.field(default_factory=uuid.uuid4)
+class Book(Base):
+    __tablename__ = "books"
+
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True, default=0)
+    title: Mapped[str] = mapped_column(nullable=False, default=None)
+    author: Mapped[str | None] = mapped_column(String(35), nullable=True, default=None)
+    genre: Mapped[str | None] = mapped_column(nullable=True, default=None)
+    published_year: Mapped[int | None] = mapped_column(nullable=True, default=None)
